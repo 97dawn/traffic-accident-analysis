@@ -1,0 +1,36 @@
+,,total,sunny,cloudy,rainy,foggy,snowy,etc
+total,accident,"220,917","193,891","7,858","16,298",322,"1,353","1,195"
+total,dead,"4,292","3,511",308,377,42,34,20
+total,injured,"331,720","289,628","12,168","25,189",602,"2,424","1,709"
+total,severely injured,"82,463","71,819","3,201","6,304",177,549,413
+total,slightly injured,"226,283","197,596","8,175","17,192",397,"1,751","1,172"
+national-road,accident,"16,959","14,627",641,"1,324",73,184,110
+national-road,dead,723,567,63,66,14,11,2
+national-road,injured,"29,375","25,169","1,076","2,455",127,363,185
+national-road,severely injured,"7,881","6,716",334,641,44,106,40
+national-road,slightly injured,"19,691","16,897",678,"1,661",77,243,135
+local-road,accident,"18,223","15,685",829,"1,389",60,171,89
+local-road,dead,562,451,34,63,8,2,4
+local-road,injured,"28,860","24,782","1,319","2,197",102,332,128
+local-road,severely injured,"7,962","6,745",402,630,33,113,39
+local-road,slightly injured,"18,924","16,347",830,"1,413",65,195,74
+metropolitan-city-road,accident,"87,685","77,031","3,013","6,697",47,357,540
+metropolitan-city-road,dead,"1,003",807,80,106,2,4,4
+metropolitan-city-road,injured,"126,638","110,792","4,512","9,915",77,584,758
+metropolitan-city-road,severely injured,"30,185","26,391","1,125","2,381",23,100,165
+metropolitan-city-road,slightly injured,"86,655","75,731","3,070","6,811",43,460,540
+city-county-road,accident,"78,627","69,280","2,638","5,724",116,513,356
+city-county-road,dead,"1,527","1,282",97,115,9,14,10
+city-county-road,injured,"118,227","103,645","4,118","8,884",190,875,515
+city-county-road,severely injured,"29,483","25,852","1,063","2,213",54,168,133
+city-county-road,slightly injured,"81,794","71,677","2,832","6,152",130,658,345
+expressway,accident,"4,347","3,687",193,385,17,61,4
+expressway,dead,273,228,22,15,7,1,0
+expressway,injured,"10,318","8,771",495,770,97,178,7
+expressway,severely injured,"2,299","1,916",115,202,17,45,4
+expressway,slightly injured,"7,170","6,127",349,487,79,125,3
+etc,accident,"15,076","13,581",544,779,9,67,96
+etc,dead,204,176,12,12,2,2,0
+etc,injured,"18,302","16,469",648,968,9,92,116
+etc,severely injured,"4,653","4,199",162,237,6,17,32
+etc,slightly injured,"12,049","10,817",416,668,3,70,75

@@ -1,0 +1,16 @@
+,,below-20,21~30,31~40,41~50,51~60,above-60
+car-to-person,walking-across,1125,3187,4508,6071,6473,5459
+car-to-person,driving-on-the,136,475,578,767,876,790
+car-to-person,passing-the-edge-of-the-road-area,95,486,520,743,822,878
+car-to-person,on-the-way,106,185,237,360,372,367
+car-to-person,etc,422,1463,1899,2773,3401,2915
+car-to-car,head-on-collision,823,2889,3227,4124,4723,3712
+car-to-car,side-rightangle-collision,3335,9786,11390,15199,18089,15598
+car-to-car,bump,1191,6226,7727,9244,9995,6640
+car-to-car,etc,1117,3689,4525,5871,6758,6131
+car-alone,workpiece-collision,131,402,337,387,497,406
+car-alone,out-of-the-way,16,32,33,42,59,81
+car-alone,parked-stopped-car-collsion,6,5,9,8,2,6
+car-alone,overturn,401,846,650,824,974,1159
+car-alone,etc,102,126,259,806,1257,550
+crosswalk,etc,0,0,1,0,1,4

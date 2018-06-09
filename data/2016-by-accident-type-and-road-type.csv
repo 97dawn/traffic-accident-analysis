@@ -1,0 +1,16 @@
+,,national-road,local-road,metropolitan-city-road,city-road,county-road,expressway,backside-road,etc
+car-to-person,walking-across,1075,1904,11316,9610,751,24,1952,191
+car-to-person,driving-on-the,103,169,1803,868,95,18,543,23
+car-to-person,passing-the-edge-of-the-road-area,79,179,1385,686,150,3,1029,33
+car-to-person,on-the-way,51,79,854,428,24,1,128,62
+car-to-person,etc,382,661,5651,2929,288,72,2561,329
+car-to-car,head-on-collision,1984,2523,4814,7837,943,251,985,161
+car-to-car,side-rightangle-collision,5522,5847,29174,25284,2750,888,3626,306
+car-to-car,bump,4471,3025,17647,12238,743,1923,830,146
+car-to-car,etc,1939,2397,12030,8557,630,946,1324,268
+car-alone,workpiece-collision,336,326,575,603,161,87,62,10
+car-alone,out-of-the-way,43,54,24,54,48,2,28,10
+car-alone,parked-stopped-car-collsion,0,3,11,14,4,0,4,0
+car-alone,overturn,761,864,929,1360,535,75,269,61
+car-alone,etc,213,191,1472,962,72,57,104,29
+crosswalk,etc,0,1,0,3,0,0,2,0

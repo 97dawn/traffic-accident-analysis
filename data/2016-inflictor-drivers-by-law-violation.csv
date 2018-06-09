@@ -1,0 +1,111 @@
+,,total,day,night
+total,accident,220917,125808,95109
+total,dead,4292,2135,2157
+total,injured,331720,189143,142577
+total,severely injured,82463,47339,35124
+total,slightly injured,226283,128720,97563
+overwork,accident,5,3,2
+overwork,dead,0,0,0
+overwork,injured,17,10,7
+overwork,severely injured,9,2,7
+overwork,slightly injured,8,8,0
+overspeed,accident,663,277,386
+overspeed,dead,194,57,137
+overspeed,injured,1115,499,616
+overspeed,severely injured,486,193,293
+overspeed,slightly injured,572,281,291
+violate-overtaking-method,accident,93,60,33
+violate-overtaking-method,dead,2,2,0
+violate-overtaking-method,injured,113,73,40
+violate-overtaking-method,severely injured,26,22,4
+violate-overtaking-method,slightly injured,75,45,30
+violate-overtaking-ban,accident,328,254,74
+violate-overtaking-ban,dead,3,3,0
+violate-overtaking-ban,injured,518,408,110
+violate-overtaking-ban,severely injured,148,129,19
+violate-overtaking-ban,slightly injured,342,264,78
+drive-over-centerline,accident,10712,6237,4475
+drive-over-centerline,dead,338,204,134
+drive-over-centerline,injured,18451,11098,7353
+drive-over-centerline,severely injured,5673,3521,2152
+drive-over-centerline,slightly injured,11807,6984,4823
+violate-traffic-light,accident,24408,12473,11935
+violate-traffic-light,dead,352,185,167
+violate-traffic-light,injured,40297,20171,20126
+violate-traffic-light,severely injured,11647,5790,5857
+violate-traffic-light,slightly injured,26382,13300,13082
+unobtain-safe-distance,accident,20660,12712,7948
+unobtain-safe-distance,dead,73,50,23
+unobtain-safe-distance,injured,36161,22466,13695
+unobtain-safe-distance,severely injured,5556,3555,2001
+unobtain-safe-distance,slightly injured,27957,17251,10706
+vioate-pause-and-slow-speed,accident,536,361,175
+vioate-pause-and-slow-speed,dead,2,2,0
+vioate-pause-and-slow-speed,injured,861,594,267
+vioate-pause-and-slow-speed,severely injured,214,165,49
+vioate-pause-and-slow-speed,slightly injured,555,370,185
+improper-rotation,accident,1373,792,581
+improper-rotation,dead,28,17,11
+improper-rotation,injured,1856,1068,788
+improper-rotation,severely injured,461,263,198
+improper-rotation,slightly injured,1223,702,521
+violate-pass-first-priority,accident,18,11,7
+violate-pass-first-priority,dead,0,0,0
+violate-pass-first-priority,injured,27,16,11
+violate-pass-first-priority,severely injured,2,2,0
+violate-pass-first-priority,slightly injured,24,13,11
+break-yield-duty,accident,38,31,7
+break-yield-duty,dead,0,0,0
+break-yield-duty,injured,56,45,11
+break-yield-duty,severely injured,12,10,2
+break-yield-duty,slightly injured,35,29,6
+break-safe-drive-duty,accident,124399,68895,55504
+break-safe-drive-duty,dead,2953,1387,1566
+break-safe-drive-duty,injured,177933,98641,79292
+break-safe-drive-duty,severely injured,43994,24598,19396
+break-safe-drive-duty,slightly injured,120771,66733,54038
+violate-intersection-passing-method,accident,14602,9381,5221
+violate-intersection-passing-method,dead,70,55,15
+violate-intersection-passing-method,injured,23332,14795,8537
+violate-intersection-passing-method,severely injured,4984,3252,1732
+violate-intersection-passing-method,slightly injured,16773,10560,6213
+violate-pedestrian-protection-duty,accident,7808,4412,3396
+violate-pedestrian-protection-duty,dead,178,98,80
+violate-pedestrian-protection-duty,injured,8198,4551,3647
+violate-pedestrian-protection-duty,severely injured,3955,2209,1746
+violate-pedestrian-protection-duty,slightly injured,3999,2210,1789
+violate-path-change,accident,3730,2255,1475
+violate-path-change,dead,12,8,4
+violate-path-change,injured,5973,3518,2455
+violate-path-change,severely injured,979,601,378
+violate-path-change,slightly injured,4556,2658,1898
+straight-and-right-turn-traffic-obstruction,accident,6619,4505,2114
+straight-and-right-turn-traffic-obstruction,dead,38,30,8
+straight-and-right-turn-traffic-obstruction,injured,11123,7556,3567
+straight-and-right-turn-traffic-obstruction,severely injured,2466,1762,704
+straight-and-right-turn-traffic-obstruction,slightly injured,7837,5234,2603
+violate-railroad-crossing-method,accident,4,3,1
+violate-railroad-crossing-method,dead,0,0,0
+violate-railroad-crossing-method,injured,6,5,1
+violate-railroad-crossing-method,severely injured,4,4,0
+violate-railroad-crossing-method,slightly injured,2,1,1
+violate-obligation-to pay-for-emergency-cars,accident,1,1,0
+violate-obligation-to pay-for-emergency-cars,dead,0,0,0
+violate-obligation-to pay-for-emergency-cars,injured,7,7,0
+violate-obligation-to pay-for-emergency-cars,severely injured,1,1,0
+violate-obligation-to pay-for-emergency-cars,slightly injured,6,6,0
+etc,accident,4900,3128,1772
+etc,dead,49,37,12
+etc,injured,5640,3589,2051
+etc,severely injured,1833,1250,583
+etc,slightly injured,3338,2050,1288
+violate-driving-prohibition-of-poor-maintenance,accident,12,12,0
+violate-driving-prohibition-of-poor-maintenance,dead,0,0,0
+violate-driving-prohibition-of-poor-maintenance,injured,27,27,0
+violate-driving-prohibition-of-poor-maintenance,severely injured,8,8,0
+violate-driving-prohibition-of-poor-maintenance,slightly injured,19,19,0
+pedestrian-fault,accident,8,5,3
+pedestrian-fault,dead,0,0,0
+pedestrian-fault,injured,9,6,3
+pedestrian-fault,severely injured,5,2,3
+pedestrian-fault,slightly injured,2,2,0

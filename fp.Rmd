@@ -1,0 +1,95 @@
+---
+title: "Untitled"
+author: "Doeun Kim"
+date: "June 8, 2018"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(plotly)
+```
+
+## Problem
+Traffic accident has been one of the unresolvable social problems of all national governments. As far as I know, Korea, the country where I originally come from, is desperately striving with reducing the number of traffic accidents, but it seems hard to reduce it. I assume that the government needs more data analysis in order to figure out the main causes. Therefore, I prepared this analysis in order to figure out what kind of person mainly causes what kind of traffic accident in which place and on what day, time, and weather based on the collected traffic accidents data in Korea in 2016, which is the latest.
+
+## Who
+
+```{r}
+age_by_month <- read.csv("data/2016-inflictor-driver-by-age-and-month.csv")
+months <- c('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December')
+below14 <- c()
+from15to20 <- c()
+from21to30 <- c()
+from31to40 <- c()
+from41to50 <- c()
+from51to60 <- c()
+from61to64 <- c()
+from65to70 <- c()
+above71 <- c()
+for(name in names(age_by_month)){
+  if(name != "X" & name != "X.1" & name != "total"){
+    below14 <- c(below14, as.numeric(as.character(age_by_month[age_by_month$X=="below-14" & age_by_month$X.1=="accident", ][[name]])))
+    from15to20 <- c(from15to20, as.numeric(as.character(age_by_month[age_by_month$X=="15~20" & age_by_month$X.1=="accident", ][[name]])))
+    from21to30 <- c(from21to30, as.numeric(as.character(age_by_month[age_by_month$X=="21~30" & age_by_month$X.1=="accident", ][[name]])))
+    from31to40 <- c(from31to40, as.numeric(as.character(age_by_month[age_by_month$X=="31~40" & age_by_month$X.1=="accident", ][[name]])))
+    from41to50 <- c(from41to50, as.numeric(as.character(age_by_month[age_by_month$X=="41~50" & age_by_month$X.1=="accident", ][[name]])))
+    from51to60 <- c(from51to60, as.numeric(as.character(age_by_month[age_by_month$X=="51~60" & age_by_month$X.1=="accident", ][[name]])))
+    from61to64 <- c(from61to64, as.numeric(as.character(age_by_month[age_by_month$X=="61~64" & age_by_month$X.1=="accident", ][[name]])))
+    from65to70 <- c(from65to70, as.numeric(as.character(age_by_month[age_by_month$X=="65~70" & age_by_month$X.1=="accident", ][[name]])))
+    above71 <- c(above71, as.numeric(as.character(age_by_month[age_by_month$X=="above-71" & age_by_month$X.1=="accident", ][[name]])))
+  }
+}
+data <- data.frame(months, below14, from15to20, from21to30, from31to40, from41to50, from51to60, from61to64, from65to70, above71)
+#The default order will be alphabetized unless specified as below:
+data$months <- factor(data$months, levels = data[["months"]])
+plot_ly(data, x = ~months, y = ~below14, type = 'bar', name = 'below 14') %>%
+  add_trace(y = ~from15to20, name = '15~20') %>% add_trace(y = ~from21to30, name = '21~30') %>% add_trace(y = ~from31to40, name = '31~40') %>% add_trace(y = ~from41to50, name = '41~50') %>% add_trace(y = ~from51to60, name = '51~60') %>% add_trace(y = ~from61to64, name = '61~64') %>% add_trace(y = ~from65to70, name = '65~70') %>% add_trace(y = ~above71, name = 'above 70') %>%
+  layout(title = "Age vs Month vs Number of Traffic Accidents",xaxis = list(title = "", tickangle = -45), yaxis = list(title = 'Accidents'), margin = list(b = 100),barmode = 'group')
+```
+```{r}
+drunken_by_time <- read.csv("data/2016-inflictor-driver-by-drunken-rate-day-and-night.csv")
+times <- c("Day","Night")
+from0.05to0.09 <- c()
+from0.10to0.14 <- c()
+from0.15to0.19 <- c()
+from0.20to0.24 <- c()
+from0.25to0.29 <- c()
+from0.30to0.34 <- c()
+above0.35 <- c()
+for(name in names(drunken_by_time)){
+  if(name != "X" & name != "X.1" & name != "total"){
+    from0.05to0.09 <- c(from0.05to0.09, as.numeric(as.character(drunken_by_time[drunken_by_time$X=="0.05%~0.09%" & drunken_by_time$X.1=="accident", ][[name]])))
+    from0.10to0.14 <- c(from0.10to0.14, as.numeric(as.character(drunken_by_time[drunken_by_time$X=="0.10%~0.14%" & drunken_by_time$X.1=="accident", ][[name]])))
+    from0.15to0.19 <- c(from0.15to0.19, as.numeric(as.character(drunken_by_time[drunken_by_time$X=="0.15%~0.19%" & drunken_by_time$X.1=="accident", ][[name]])))
+    from0.20to0.24 <- c(from0.20to0.24, as.numeric(as.character(drunken_by_time[drunken_by_time$X=="0.20%~0.24%" & drunken_by_time$X.1=="accident", ][[name]])))
+    from0.25to0.29 <- c(from0.25to0.29, as.numeric(as.character(drunken_by_time[drunken_by_time$X=="0.25%~0.29%" & drunken_by_time$X.1=="accident", ][[name]])))
+    from0.30to0.34 <- c(from0.30to0.34, as.numeric(as.character(drunken_by_time[drunken_by_time$X=="0.30%~0.34%" & drunken_by_time$X.1=="accident", ][[name]])))
+    above0.35 <- c(above0.35, as.numeric(as.character(drunken_by_time[drunken_by_time$X=="above-0.35%" & drunken_by_time$X.1=="accident", ][[name]])))
+  }
+}
+data <- data.frame(times, from0.05to0.09, from0.10to0.14, from0.15to0.19, from0.20to0.24, from0.25to0.29, from0.30to0.34, above0.35)
+
+plot_ly(data, x = ~times, y = ~from0.05to0.09, type = 'bar', name = '0.05%~0.09%') %>%
+  add_trace(y = ~from0.10to0.14, name = '0.10%~0.14%') %>% add_trace(y = ~from0.15to0.19, name = '0.15%~0.19%') %>% add_trace(y = ~from0.20to0.24, name = '0.20%~0.24%') %>% add_trace(y = ~from0.25to0.29, name = '0.25%~0.29%') %>% add_trace(y = ~from0.30to0.34, name = '0.30%~0.34%') %>% add_trace(y = ~above0.35, name = 'above 0.39%') %>% 
+  layout(title="Blood Alcohol Content vs Day-Night vs Number of Traffic Accidents",xaxis = list(title = ""),yaxis = list(title = 'Accidents'), barmode = 'group')
+```
+
+```{r}
+law_violation <- read.csv("data/2016-inflictor-drivers-by-law-violation.csv")
+types <- c("overwork","overspeed","violate-overtaking-method","violate-overtaking-ban","drive-over-centerline","violate-traffic-light","unobtain-safe-distance","vioate-pause-and-slow-speed","improper-rotation","violate-pass-first-priority","break-yield-duty","break-safe-drive-duty","violate-intersection-passing-method","violate-pedestrian-protection-duty","violate-path-change","straight-and-right-turn-traffic-obstruction","violate-railroad-crossing-method","violate-obligation-to pay-for-emergency-cars","violate-driving-prohibition-of-poor-maintenance","pedestrian-fault")
+day_data <- c()
+night_data <- c()
+for(type in types){
+  day_data[type] = as.numeric(as.character(law_violation[law_violation$X==type & law_violation$X.1=="accident", ][["day"]]))
+  night_data[type] = as.numeric(as.character(law_violation[law_violation$X==type & law_violation$X.1=="accident", ][["night"]]))
+}
+day_data = data.frame(day_data)
+day_data <- data.frame("Categorie"=rownames(day_data),day_data)
+data <- day_data[, c("Categorie","day_data")]
+colors <- c('red','rgb(211,94,96)','rgb(211,94,96)','rgb(211,94,96)','rgb(211,94,96)','rgb(211,94,96)','rgb(211,94,96)','rgb(211,94,96)','rgb(211,94,96)','rgb(211,94,96)','rgb(211,94,96)','rgb(211,94,96)','rgb(211,94,96)','rgb(211,94,96)','rgb(211,94,96)','rgb(211,94,96)','rgb(211,94,96)','rgb(211,94,96)','rgb(211,94,96)','rgb(211,94,96)')
+plot_ly(data, labels=~Categorie, values = ~day_data, type="pie", textinfo = "label+percent", textposition="inside",insidetextfont = list(color="#FFFFFF"),marker = list(colors=colors, line = list(color = "#FFFFFF", width=1)), showlegend = FALSE)%>%
+  layout(title="Type of law violation", xaxis = list(showgrid=FALSE, zeroline = FALSE, showticklabels = FALSE), yaxis = list(showgrid=FALSE, zeroline=FALSE, showticklabels=FALSE))
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
