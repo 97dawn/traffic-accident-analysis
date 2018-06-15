@@ -89,11 +89,11 @@ violate-railroad-crossing-method,dead,0,0,0
 violate-railroad-crossing-method,injured,6,5,1
 violate-railroad-crossing-method,severely injured,4,4,0
 violate-railroad-crossing-method,slightly injured,2,1,1
-violate-obligation-to pay-for-emergency-cars,accident,1,1,0
-violate-obligation-to pay-for-emergency-cars,dead,0,0,0
-violate-obligation-to pay-for-emergency-cars,injured,7,7,0
-violate-obligation-to pay-for-emergency-cars,severely injured,1,1,0
-violate-obligation-to pay-for-emergency-cars,slightly injured,6,6,0
+violate-obligation-to-pay-for-emergency-cars,accident,1,1,0
+violate-obligation-to-pay-for-emergency-cars,dead,0,0,0
+violate-obligation-to-pay-for-emergency-cars,injured,7,7,0
+violate-obligation-to-pay-for-emergency-cars,severely injured,1,1,0
+violate-obligation-to-pay-for-emergency-cars,slightly injured,6,6,0
 etc,accident,4900,3128,1772
 etc,dead,49,37,12
 etc,injured,5640,3589,2051
