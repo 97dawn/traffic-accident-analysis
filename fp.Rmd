@@ -11,7 +11,7 @@ library(plotly)
 ```
 
 ## Problem
-Traffic accident has been one of the unresolvable social problems of all national governments. As far as I know, Korea, the country where I originally come from, is desperately striving with reducing the number of traffic accidents, but it seems hard to reduce it. I assume that the government needs more data analysis in order to figure out the main causes. Therefore, I prepared this analysis in order to figure out what kind of person mainly causes what kind of traffic accident in which place and on what day, time, and weather based on the collected traffic accidents data in Korea in 2016, which is the latest.
+Traffic accident has been one of the unresolvable social problems of all national governments. As far as I know, Korea, the country where I originally come from, is desperately striving with reducing the number of traffic accidents, but it seems hard to reduce it. I assume that the government needs more data analysis in order to figure out the main causes. Therefore, I prepared this analysis in order to figure out what kind of person mainly causes what kind of traffic accident in which place and on which month, day, time, and weather with which reason based on the collected traffic accidents data in Korea in 2016, which is the latest.
 
 
 ## Analysis - Who mainly causes traffic accidents?
