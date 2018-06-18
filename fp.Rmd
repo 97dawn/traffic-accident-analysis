@@ -1,7 +1,7 @@
 ---
-title: "Untitled"
+title: "Analysis on Traffic Accidents"
 author: "Doeun Kim"
-date: "June 8, 2018"
+date: "June 18, 2018"
 output: html_document
 ---
 
@@ -13,8 +13,9 @@ library(plotly)
 ## Problem
 Traffic accident has been one of the unresolvable social problems of all national governments. As far as I know, Korea, the country where I originally come from, is desperately striving with reducing the number of traffic accidents, but it seems hard to reduce it. I assume that the government needs more data analysis in order to figure out the main causes. Therefore, I prepared this analysis in order to figure out what kind of person mainly causes what kind of traffic accident in which place and on what day, time, and weather based on the collected traffic accidents data in Korea in 2016, which is the latest.
 
-## Who
 
+## Analysis - Who mainly causes traffic accidents?
+In order to figure out who mainly causes traffic accidents and hurts other people, I analyzed 4 tables. In the first table, I preprocessed the data by merging '61~64' and '65~70' columns in order to analyze the data by age group and selected only 'accident' in the second column among 5 types of second column. You should note that I used 'accident' value in the second column because this report is dealing with the number of traffic accidents, not the number of casualities. The graph's x-axis represents the month when the person caused traffic accident in 2016 and y-axis represents the number of traffic accidents occurred. Each of the line represents the age group. The first table is used to show the age group that causes traffic accidents the most.
 ```{r}
 library(plotly)
 age_by_month <- read.csv("data/2016-inflictor-driver-by-age-and-month.csv")
@@ -57,6 +58,10 @@ plot_ly(data, x = ~months, y = ~below20, name = 'below 20', type = 'scatter', mo
          yaxis = list (title = "Accidents"), margin = list(b = 70))
 
 ```
+As a result of analyzing the data, people aged in between 51 to 60 had the most traffic accidents every month in 2016. Before analysis, I thought that 40s were the age group that caused the most traffic accidents because 40s is the age when people feel that they are old and there are many 40s drivers in Korea. However, as you can see the graph, there is a quite huge gap with 500 between 50s line and 40s line. Also, we can recognize that quite lots of 50s drive.
+
+
+The second table is based on the fact that the traffic accident inducers were drunken. The table is used to show how much traffic accident inducers were drunken on which time zone. 
 ```{r}
 drunken_by_time <- read.csv("data/2016-inflictor-driver-by-drunken-rate-day-and-night.csv")
 times <- c("Day","Night")
@@ -82,9 +87,229 @@ data <- data.frame(times, from0.05to0.09, from0.10to0.14, from0.15to0.19, from0.
 
 plot_ly(data, x = ~times, y = ~from0.05to0.09, type = 'bar', name = '0.05%~0.09%') %>%
   add_trace(y = ~from0.10to0.14, name = '0.10%~0.14%') %>% add_trace(y = ~from0.15to0.19, name = '0.15%~0.19%') %>% add_trace(y = ~from0.20to0.24, name = '0.20%~0.24%') %>% add_trace(y = ~from0.25to0.29, name = '0.25%~0.29%') %>% add_trace(y = ~from0.30to0.34, name = '0.30%~0.34%') %>% add_trace(y = ~above0.35, name = 'above 0.39%') %>% 
-  layout(title="Blood Alcohol Content vs Day-Night vs Number of Traffic Accidents",xaxis = list(title = ""),yaxis = list(title = 'Accidents'), barmode = 'group')
+  layout(title="Blood Alcohol Content vs Day/Night vs Number of Traffic Accidents",xaxis = list(title = ""),yaxis = list(title = 'Accidents'), barmode = 'group', margin = list(b = 70))
+```
+If you see the graph, we can clearly recognize that drunken people causes more traffic accidents at night than at daytime because people usually drink at night after their work or study. Among several blood alcohol content ranges, people who had 0.10% ~ 0.14% of blood alcohol content had traffic accidents the most regardless of the time zone. 
+
+## Summary - Who mainly causes traffic accidents?
+1. Fifties regardless of month.
+2. Among drunken traffic accident inducers, people who have 0.10%~0.14% Blood Alcohol Content regardless of time zone.
+
+
+## Analysis - What kinds of traffic accident mainly happened by whom?
+In order to figure out what kinds of traffic accident mainly happend in 2016, I seperated the table into three graphs based on the type of accidents. The first graph shows the data analysis on car to person type traffic accidents. The first graph's x-axis represents the age group of the people who caused car to person type traffic accident in 2016 and y-axis represents the number of car to person type traffic accidents occurred. Color represents the sub-type of car to person traffic accidents. The first graph is used to show the comparison on the number of accidents in sub-type of car to person type based on the car to person type traffic accident inducers' age group.
+```{r}
+accident_types <- read.csv("data/2016-by-accident-type-and-inflictor-driver-age.csv",header=F)
+car_to_person<- c("walking across", "passing roadway", "passing the edge of the road area", "passing sidewalk")
+ages <- c("below 20", "21~30","31~40","41~50","51~60","above 60")
+
+walking_across <- as.numeric(accident_types[2,3:8])
+passing_roadway <- as.numeric(accident_types[3,3:8])
+passing_the_edge_of_the_road_area <- as.numeric(accident_types[4,3:8])
+passing_sidewalk <- as.numeric(accident_types[5,3:8])
+data <- data.frame(ages, walking_across, passing_roadway,passing_the_edge_of_the_road_area,passing_sidewalk)
+#The default order will be alphabetized unless specified as below:
+data$ages <- factor(data$ages, levels = data[["ages"]])
+plot_ly(data, x = ~ages, y = ~walking_across, type = 'bar', name = 'walking across') %>%
+  add_trace(y = ~passing_roadway, name = 'passing roadway') %>%
+  add_trace(y = ~passing_the_edge_of_the_road_area, name = 'passing the edge of the road area') %>%
+  add_trace(y = ~passing_sidewalk, name = 'passing sidewalk') %>%
+  layout(title="Car to Person", xaxis = list(title="Ages"),yaxis = list(title = 'Accidents'), barmode = 'stack', margin = list(b = 70))
+
 ```
 
+As an analysis of the graph, 50s hit walking people the most, especially the pedestrians who were passing roadway. Additionally, 50s hit the pedestrians who were passing sidewalk the most among other age groups, which means that 50s are so careless so that they easily cross the sidewalk raised spot abnormally. The number of hitting pedestrians who were passing sidewalk was the smallest,but the number of hitting pedestrians who were passing the edge of the road area was the biggest.
+
+
+The second graph shows the data analysis on car to car type traffic accidents. The x-axis represents the age group of the people who caused car to car type traffic accident in 2016 and y-axis represents the number of car to car type traffic accidents occurred. Color represents the sub-type of car to car traffic accidents. The second graph is used to show the comparison on the number of accidents in sub-type of car to car type based on the car to car type traffic accident inducers' age group.
+
+```{r}
+frontal_collision <- as.numeric(accident_types[7,3:8])
+side_right_angle_collision <- as.numeric(accident_types[8,3:8])
+bump <- as.numeric(accident_types[9,3:8])
+data <- data.frame(ages, frontal_collision, side_right_angle_collision,bump)
+#The default order will be alphabetized unless specified as below:
+data$ages <- factor(data$ages, levels = data[["ages"]])
+plot_ly(data, x = ~ages, y = ~frontal_collision, type = 'bar', name = 'frontal collision') %>%
+  add_trace(y = ~side_right_angle_collision, name = 'side angle collision') %>%
+  add_trace(y = ~bump, name = 'bump') %>%
+  layout(title="Car to Car", xaxis = list(title="Ages"),yaxis = list(title = 'Accidents'), barmode = 'stack', margin = list(b = 70))
+```
+
+As an analysis of the graph, 20s hit other cars the most, especially they made side angle collision the most among three differen types of car to car accidents. Through this analysis, I could have two speculations on the reason of why 20s had side angle collsion the most. First, early to mid-20s, mostly undergraduate students who just obtained driver's license, were not familar with driving so that they might had side angle collsion while they were turning either left or right. Second, mid to late 20s were in hurry on rush hours so that they couldn't be careful with other cars. Among the three sub-types of car to car traffic accidents, bump occurred the most. But the number of side angle collision was the smallest
+
+The third graph shows the data analysis on car alone type traffic accidents. The x-axis represents the age group of the people who caused car alone type traffic accident in 2016 and y-axis represents the number of car alone type traffic accidents occurred. Color represents the sub-type of car alone traffic accidents. The third graph is used to show the comparison on the number of accidents in sub-type of car alone type based on the car alone type traffic accident inducers' age group.
+```{r}
+workpiece_collision <- as.numeric(accident_types[11,3:8])
+out_of_the_way <- as.numeric(accident_types[12,3:8])
+parked_stopped_car_collsion <- as.numeric(accident_types[13,3:8])
+overturn <- as.numeric(accident_types[14,3:8])
+data <- data.frame(ages, workpiece_collision, out_of_the_way,parked_stopped_car_collsion,overturn)
+#The default order will be alphabetized unless specified as below:
+data$ages <- factor(data$ages, levels = data[["ages"]])
+plot_ly(data, x = ~ages, y = ~workpiece_collision, type = 'bar', name = 'workpiece collision') %>%
+  add_trace(y = ~out_of_the_way, name = 'out of the way') %>%
+  add_trace(y = ~parked_stopped_car_collsion, name = 'parked/stopped car collsion') %>%
+  add_trace(y = ~overturn, name = 'overturn') %>%
+  layout(title="Car Alone", xaxis = list(title="Ages"),yaxis = list(title = 'Accidents'), barmode = 'stack', margin = list(b = 70))
+```
+As an analysis of the graph, 30s had car alone type traffic accidents the most. Among 4 types of sub-types of car alone type traffic accidents, 30s had parked/stopped car collsion the most. The number of workpeice collision was the smallest. The number of overturn was the biggest, but there is no big gap between overturn and parked/stopped car collsion.
+
+## Summary - What kinds of traffic accident mainly happened by whom?
+1. Car to Person
+  + Number 1 age group of car to person traffic accidents: 50s
+  + Number 1 type of car to person traffic accident by 50s: hitting the pedestrians who were passing roadway
+  + 50s hit the pedestrians who were passing sidewalk the most among other age groups.
+  + Hitting pedestrians who were passing the edge of the road area occurred the most.
+  + Hitting pedestrians who were passing sidewalk occurred the least.
+2. Car to Car
+  + Number 1 age group of car to car traffic accidents: 20s 
+  + Number 1 type of car to car traffic accident by 20s: side angle collision 
+  + Bump occurred the most. 
+  + Side angle collision occurred the least.
+3. Car Alone
+  + Number 1 age group of car alone traffic accidents: 30s 
+  + Number 1 type of car alone traffic accident by 30s: parked/stopped car collsion
+  + Overturn occurred the most, but there is no big gap between overturn and parked/stopped car collsion.
+  + Workpeice collision occurred the least. 
+
+## Analysis - When and where traffic accidents mainly happened?
+In order to figure out when and where traffic accidents happend the most in 2016, I analyzed 4 tables based on the type of road. The block of code below is for setting up the data frames regarding the place and time and some fixed data.
+```{r}
+Days <- read.csv("data/2016-by-road-type-and-day.csv",header=F)
+Months <- read.csv("data/2016-by-road-type-and-month.csv",header=F)
+Times <- read.csv("data/2016-by-road-type-and-time.csv",header=F)
+Weathers <- read.csv("data/2016-by-road-type-and-weather.csv",header=F)
+months <- c('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December')
+days <- c('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday')
+times <- c('Day','Night')
+weathers <- c('sunny','cloudy','rainy','foggy','snowy')
+```
+
+The first graph shows the data analysis on the number of traffic accidents by month and road type. The first graph's x-axis represents the month and y-axis represents the number of traffic accidents occurred. Color represents the road type. 
+```{r}
+nationalRoad<- c()
+localRoad <- c()
+metroRoad <- c()
+ccRoad <- c()
+expressway <-c()
+for(name in colnames(Months)){
+  if(name != "V1" & name != "V2" & name != "V3"){
+    nationalRoad <- c(nationalRoad, as.numeric(as.character(Months[Months$V1=="nationalRoad" & Months$V2=="accident", ][[name]])))
+    localRoad <- c(localRoad, as.numeric(as.character(Months[Months$V1=="localRoad" & Months$V2=="accident", ][[name]])))
+    metroRoad <- c(metroRoad, as.numeric(as.character(Months[Months$V1=="metropolitanCityRoad" & Months$V2=="accident", ][[name]])))
+    ccRoad <- c(ccRoad, as.numeric(as.character(Months[Months$V1=="cityCountyRoad" & Months$V2=="accident", ][[name]])))
+    expressway <- c(expressway, as.numeric(as.character(Months[Months$V1=="expressway" & Months$V2=="accident", ][[name]])))
+  }
+}
+data <- data.frame(months, nationalRoad, localRoad, metroRoad, ccRoad, expressway)
+#The default order will be alphabetized unless specified as below:
+data$months <- factor(data$months, levels = data[["months"]])
+
+plot_ly(data, x = ~months, y = ~nationalRoad, type = 'bar', name = 'national road') %>%
+  add_trace(y = ~localRoad, name = 'local road') %>% add_trace(y = ~metroRoad, name = 'metropolitan city road') %>% add_trace(y = ~ccRoad, name = 'city county road') %>% add_trace(y = ~expressway, name = 'expressway')  %>% 
+  layout(title="Traffic Accidents vs Month",xaxis = list(title = ""),yaxis = list(title = 'Accidents'), barmode = 'group', margin = list(b = 70))
+```
+As the analysis of the graph, regardless of the month, traffic accidents were occurred the most in metropolitan city roads, followed by city country roads. I could assume that the main reason will be that metropolitan city has high population density. It is hard to figure out that which month had the most traffic accidents. For each month, we could see consistency on the frequency ranking of road type.
+
+
+The second graph shows the data analysis on the number of traffic accidents by day and road type. The first graph's x-axis represents the day and y-axis represents the number of traffic accidents occurred. Color represents the road type. 
+```{r}
+nationalRoad<- c()
+localRoad <- c()
+metroRoad <- c()
+ccRoad <- c()
+expressway <-c()
+for(name in colnames(Days)){
+  if(name != "V1" & name != "V2" & name != "V3"){
+    nationalRoad <- c(nationalRoad, as.numeric(as.character(Days[Days$V1=="nationalRoad" & Days$V2=="accident", ][[name]])))
+    localRoad <- c(localRoad, as.numeric(as.character(Days[Days$V1=="localRoad" & Days$V2=="accident", ][[name]])))
+    metroRoad <- c(metroRoad, as.numeric(as.character(Days[Days$V1=="metropolitanCityRoad" & Days$V2=="accident", ][[name]])))
+    ccRoad <- c(ccRoad, as.numeric(as.character(Days[Days$V1=="cityCountyRoad" & Days$V2=="accident", ][[name]])))
+    expressway <- c(expressway, as.numeric(as.character(Days[Days$V1=="expressway" & Days$V2=="accident", ][[name]])))
+  }
+}
+data <- data.frame(days, nationalRoad, localRoad, metroRoad, ccRoad, expressway)
+#The default order will be alphabetized unless specified as below:
+data$days <- factor(data$days, levels = data[["days"]])
+
+plot_ly(data, x = ~days, y = ~nationalRoad, type = 'bar', name = 'national road') %>%
+  add_trace(y = ~localRoad, name = 'local road') %>% add_trace(y = ~metroRoad, name = 'metropolitan city road') %>% add_trace(y = ~ccRoad, name = 'city county road') %>% add_trace(y = ~expressway, name = 'expressway')  %>% 
+  layout(title="Traffic Accidents vs Day",xaxis = list(title = ""),yaxis = list(title = 'Accidents'), barmode = 'group', margin = list(b = 70))
+```
+As the analysis of the graph, regardless of the day, traffic accidents were occurred the most in metropolitan city roads, followed by city country roads. I could assume that the main reason will be that metropolitan city has high population density. Every bars in Friday are higher than the bars in any other days. I think it is because that Koreans play a lot on Friday night. For each day, we could see consistency on the frequency ranking of road type.
+
+The third graph shows the data analysis on the number of traffic accidents by time and road type. The third graph's x-axis represents the time and y-axis represents the number of traffic accidents occurred. Color represents the road type. 
+```{r}
+nationalRoad<- c()
+localRoad <- c()
+metroRoad <- c()
+ccRoad <- c()
+expressway <-c()
+for(name in colnames(Times)){
+  if(name != "V1" & name != "V2" & name != "V3"){
+    nationalRoad <- c(nationalRoad, as.numeric(as.character(Times[Times$V1=="nationalRoad" & Times$V2=="accident", ][[name]])))
+    localRoad <- c(localRoad, as.numeric(as.character(Times[Times$V1=="localRoad" & Times$V2=="accident", ][[name]])))
+    metroRoad <- c(metroRoad, as.numeric(as.character(Times[Times$V1=="metropolitanCityRoad" & Times$V2=="accident", ][[name]])))
+    ccRoad <- c(ccRoad, as.numeric(as.character(Times[Times$V1=="cityCountyRoad" & Times$V2=="accident", ][[name]])))
+    expressway <- c(expressway, as.numeric(as.character(Times[Times$V1=="expressway" & Times$V2=="accident", ][[name]])))
+  }
+}
+data <- data.frame(times, nationalRoad, localRoad, metroRoad, ccRoad, expressway)
+
+plot_ly(data, x = ~times, y = ~nationalRoad, type = 'bar', name = 'national road') %>%
+  add_trace(y = ~localRoad, name = 'local road') %>% add_trace(y = ~metroRoad, name = 'metropolitan city road') %>% add_trace(y = ~ccRoad, name = 'city county road') %>% add_trace(y = ~expressway, name = 'expressway')  %>% 
+  layout(title="Traffic Accidents vs Time",xaxis = list(title = ""),yaxis = list(title = 'Accidents'), barmode = 'group', margin = list(b = 70))
+```
+As the analysis of the graph, regardless of the time, traffic accidents were occurred the most in metropolitan city roads, followed by city country roads. I could assume that the main reason will be that metropolitan city has high population density. The night time has more traffic accidents than the day time. For each time zone, we could see consistency on the frequency ranking of road type.
+
+
+The fourth graph shows the data analysis on the number of traffic accidents by weather and road type. The fourth graph's x-axis represents the weather and y-axis represents the number of traffic accidents occurred. Color represents the road type. 
+```{r}
+nationalRoad<- c()
+localRoad <- c()
+metroRoad <- c()
+ccRoad <- c()
+expressway <-c()
+for(name in colnames(Weathers)){
+  if(name != "V1" & name != "V2" & name != "V3"& name != "V9"){
+    nationalRoad <- c(nationalRoad, as.numeric(as.character(Weathers[Weathers$V1=="nationalRoad" & Weathers$V2=="accident", ][[name]])))
+    localRoad <- c(localRoad, as.numeric(as.character(Weathers[Weathers$V1=="localRoad" & Weathers$V2=="accident", ][[name]])))
+    metroRoad <- c(metroRoad, as.numeric(as.character(Weathers[Weathers$V1=="metropolitanCityRoad" & Weathers$V2=="accident", ][[name]])))
+    ccRoad <- c(ccRoad, as.numeric(as.character(Weathers[Weathers$V1=="cityCountyRoad" & Weathers$V2=="accident", ][[name]])))
+    expressway <- c(expressway, as.numeric(as.character(Weathers[Weathers$V1=="expressway" & Weathers$V2=="accident", ][[name]])))
+  }
+}
+data <- data.frame(weathers, nationalRoad, localRoad, metroRoad, ccRoad, expressway)
+#The default order will be alphabetized unless specified as below:
+data$weathers <- factor(data$weathers, levels = data[["weathers"]])
+
+plot_ly(data, x = ~weathers, y = ~nationalRoad, type = 'bar', name = 'national road') %>%
+  add_trace(y = ~localRoad, name = 'local road') %>% add_trace(y = ~metroRoad, name = 'metropolitan city road') %>% add_trace(y = ~ccRoad, name = 'city county road') %>% add_trace(y = ~expressway, name = 'expressway')  %>% 
+  layout(title="Traffic Accidents vs Weather",xaxis = list(title = ""),yaxis = list(title = 'Accidents'), barmode = 'group', margin = list(b = 70))
+```
+As the analysis of the graph, traffic accidents mostly occurred when the weather is sunny. Since most of the days in year are sunny, I feel insufficiency on the given data that the data value should have been in percentage, so that foggy and snowy bars are able to be seen. By just looking at the graph with our eyes, we can clearly see that traffic accidents were occurred the most in metropolitan city roads on sunny, cloudy, and rainy days. However, if we put the cursor on the little bars of foggy and snowy sections, we can recognize that traffic accidents were occurred the most in city county road. I could assume that cities and counties don't have advanced technology to deal with snow on the roads, and they have more foggy days than metropolitan city because they are more surrounded by the mountains than the metropolitan cities in Korea.
+
+## Summary - When and where traffic accidents mainly happened?
+1. Month
+  + Regardless of the month, traffic accidents were occurred the most in metropolitan city roads.
+  + It is hard to tell that which month had the most traffic accidents. 
+2. Day
+  + Regardless of the day, traffic accidents were occurred the most in metropolitan city roads.
+  + Friday had the most traffic accidents.
+3. Time
+  + Regardless of the time, traffic accidents were occurred the most in metropolitan city roads.
+  + Night time had the most traffic accidents.
+4. Weather
+  + Sunny weather had the most traffic accidents.
+  + Traffic accidents were occurred the most in metropolitan city roads on sunny, cloudy, and rainy days.
+  + Traffic accidents were occurred the most in city county roads on foggy and snowy days.
+  
+  
+## Analysis - Why traffic accidents occurred?
+In order to figure out the main reason of having traffic accidents occurred in 2016, I seperated the table into two graphs based on the time zone(day/night). Two graphs are showing the percentage on each type of law violations. I preprocessed the data by combining all the law violations that have less than 1000 into etc because they become so small if I don't preprocess the data.
+
+The first graph is showing the piechart of the types of law violation at day time.
 ```{r}
 law_violation <- read.csv("data/2016-inflictor-drivers-by-law-violation.csv")
 types <- c("overwork","overspeed","violate-overtaking-method","violate-overtaking-ban","drive-over-centerline","violate-traffic-light","unobtain-safe-distance","vioate-pause-and-slow-speed","improper-rotation","violate-pass-first-priority","break-yield-duty","break-safe-drive-duty","violate-intersection-passing-method","violate-pedestrian-protection-duty","violate-path-change","straight-and-right-turn-traffic-obstruction","violate-railroad-crossing-method","violate-obligation-to-pay-for-emergency-cars","violate-driving-prohibition-of-poor-maintenance","pedestrian-fault","etc")
@@ -112,60 +337,14 @@ data <- day_data[, c("Categorie","day_data")]
 colors <- c('#ffb3ba','#ffdfba','#ffffba','#baffc9','#bae1ff','#ffeaff','#ffeaea','#ecb7ea','#f5f0ff','#f0fcff','#f0f6ff',' #f2adde','#f2e8ad','#adc3f2','#ecb7ea','#d2adf2','#f9c35c','#cae3e0','#ffe6cc','#e6e6e6','#c5ae8c')
 plot_ly(data, labels=~Categorie, values = ~day_data, type="pie", textinfo = "label+percent", textposition="inside",insidetextfont = list(color="#000000"),marker = list(colors=colors, line = list(color = "#000000", width=1)), showlegend = FALSE)%>%
   layout(title="Types of Law Violation at Day Time", xaxis = list(showgrid=FALSE, zeroline = FALSE, showticklabels = FALSE), yaxis = list(showgrid=FALSE, zeroline=FALSE, showticklabels=FALSE))
+```
+
+The second graph is showing the piechart of the types of law violation at night time.
+```{r}
 plot_ly(data, labels=~Categorie, values = ~night_data, type="pie", textinfo = "label+percent", textposition="inside",insidetextfont = list(color="#000000"),marker = list(colors=colors, line = list(color = "#000000", width=1)), showlegend = FALSE)%>%
   layout(title="Types of Law Violation at Night Time", xaxis = list(showgrid=FALSE, zeroline = FALSE, showticklabels = FALSE), yaxis = list(showgrid=FALSE, zeroline=FALSE, showticklabels=FALSE))
 ```
+Both of piecharts show that breaking safe drive duty is the most reason that the drivers cause traffic accidents. The differene bweeten day time and night time is unobtaining safe distance is the second reason of traffic accidents in day time and violating traffic light is the second reason of traffic accidents in night time. 
 
-```{r}
-accident_types <- read.csv("data/2016-by-accident-type-and-inflictor-driver-age.csv",header=F)
-car_to_person<- c("walking across", "passing roadway", "passing the edge of the road area", "passing sidewalk")
-ages <- c("below 20", "21~30","31~40","41~50","51~60","above 60")
-
-walking_across <- as.numeric(accident_types[2,3:8])
-passing_roadway <- as.numeric(accident_types[3,3:8])
-passing_the_edge_of_the_road_area <- as.numeric(accident_types[4,3:8])
-passing_sidewalk <- as.numeric(accident_types[5,3:8])
-data <- data.frame(ages, walking_across, passing_roadway,passing_the_edge_of_the_road_area,passing_sidewalk)
-#The default order will be alphabetized unless specified as below:
-data$ages <- factor(data$ages, levels = data[["ages"]])
-plot_ly(data, x = ~ages, y = ~walking_across, type = 'bar', name = 'walking across') %>%
-  add_trace(y = ~passing_roadway, name = 'passing roadway') %>%
-  add_trace(y = ~passing_the_edge_of_the_road_area, name = 'passing the edge of the road area') %>%
-  add_trace(y = ~passing_sidewalk, name = 'passing sidewalk') %>%
-  layout(title="Car to Person", xaxis = list(title="Ages"),yaxis = list(title = 'Accidents'), barmode = 'stack')
-
-```
-
-```{r}
-frontal_collision <- as.numeric(accident_types[7,3:8])
-side_right_angle_collision <- as.numeric(accident_types[8,3:8])
-bump <- as.numeric(accident_types[9,3:8])
-data <- data.frame(ages, frontal_collision, side_right_angle_collision,bump)
-#The default order will be alphabetized unless specified as below:
-data$ages <- factor(data$ages, levels = data[["ages"]])
-plot_ly(data, x = ~ages, y = ~frontal_collision, type = 'bar', name = 'frontal collision') %>%
-  add_trace(y = ~side_right_angle_collision, name = 'side right angle collision') %>%
-  add_trace(y = ~bump, name = 'bump') %>%
-  layout(title="Car to Car", xaxis = list(title="Ages"),yaxis = list(title = 'Accidents'), barmode = 'stack')
-```
-
-```{r}
-workpiece_collision <- as.numeric(accident_types[11,3:8])
-out_of_the_way <- as.numeric(accident_types[12,3:8])
-parked_stopped_car_collsion <- as.numeric(accident_types[13,3:8])
-overturn <- as.numeric(accident_types[14,3:8])
-data <- data.frame(ages, workpiece_collision, out_of_the_way,parked_stopped_car_collsion,overturn)
-#The default order will be alphabetized unless specified as below:
-data$ages <- factor(data$ages, levels = data[["ages"]])
-plot_ly(data, x = ~ages, y = ~workpiece_collision, type = 'bar', name = 'workpiece collision') %>%
-  add_trace(y = ~out_of_the_way, name = 'out of the way') %>%
-  add_trace(y = ~parked_stopped_car_collsion, name = 'parked/stopped car collsion') %>%
-  add_trace(y = ~overturn, name = 'overturn') %>%
-  layout(title="Car to Car", xaxis = list(title="Ages"),yaxis = list(title = 'Accidents'), barmode = 'stack')
-```
-
-```{r}
-```
-
-```{r}
-```
+## Conclusion
+As a solution for reducing the number of traffic accidents, the Korean government should focus on 50s among several age groups, night time rather than day time, friday rather than any other days, druken drivers whose blood alcohol content is more than 0.10%, and side angle collision and hitting the pedestrians who were passing roadway.
